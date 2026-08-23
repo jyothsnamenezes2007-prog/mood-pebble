@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Pebble Jar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🪨 Mood Pebble Jar</h1>
+        <p class="subtitle">Drop a tiny positive thought into the digital jar.</p>
+        
+        <div class="input-section">
+            <input type="text" id="pebbleInput" placeholder="Type a good vibe (max 100 chars)..." maxlength="100">
+            <button id="dropBtn" onclick="dropPebble()">Drop Pebble</button>
+            <p id="errorMsg" class="error"></p>
+        </div>
+
+        <div class="jar-section">
+            <h2>Collected Pebbles</h2>
+            <div id="pebblesList" class="pebbles-grid">
+                <!-- Pebbles will load here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
