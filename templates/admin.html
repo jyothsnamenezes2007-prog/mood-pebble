@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Mood Pebble Jar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Admin Dashboard</h1>
+        <p class="subtitle">Welcome back, Boss ({{ username }})!</p>
+
+        <div class="jar-section" style="margin-bottom: 20px;">
+            <h2>Registered Users</h2>
+            <div class="pebbles-grid">
+                {% for u in users %}
+                    <div class="pebble-card">
+                        <strong>User:</strong> {{ u[1] }} | <strong>Role:</strong> {{ u[2] }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <a href="/" style="flex: 1;"><button style="width: 100%;">Back to Jar</button></a>
+            <a href="/logout" style="flex: 1;"><button style="width: 100%; background-color: #e74c3c;">Log Out</button></a>
+        </div>
+    </div>
+</body>
+</html>
