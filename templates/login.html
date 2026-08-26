@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mood Pebble Jar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Welcome Back</h1>
+        <p class="subtitle">Log in to access your mood jar.</p>
+
+        {% if error %}
+            <p class="error" style="text-align: center; margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
+        <form action="/login" method="POST" class="input-section">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px; font-size: 14px;">
+            Don't have an account? <a href="/register" style="color: #3498db;">Register here</a>
+        </p>
+    </div>
+</body>
+</html>
