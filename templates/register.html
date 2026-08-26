@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Mood Pebble Jar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Create Account</h1>
+        <p class="subtitle">Join the Mood Pebble community.</p>
+
+        {% if error %}
+            <p class="error" style="text-align: center; margin-bottom: 15px;">{{ error }}</p>
+        {% endif %}
+
+        <form action="/register" method="POST" class="input-section">
+            <input type="text" name="username" placeholder="Choose a Username" required>
+            <input type="password" name="password" placeholder="Choose a Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px; font-size: 14px;">
+            Already have an account? <a href="/login" style="color: #3498db;">Log in here</a>
+        </p>
+    </div>
+</body>
+</html>
