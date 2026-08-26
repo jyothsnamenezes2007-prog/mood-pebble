@@ -8,6 +8,16 @@
 </head>
 <body>
     <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <span style="font-size: 13px; color: #7f8c8d;">Logged in as: <strong>{{ username }}</strong></span>
+            <div>
+                {% if role == 'admin' %}
+                    <a href="/admin"><button style="padding: 6px 12px; font-size: 13px; background-color: #e67e22; margin-right: 5px;">Admin Panel</button></a>
+                {% endif %}
+                <a href="/logout"><button style="padding: 6px 12px; font-size: 13px; background-color: #e74c3c;">Logout</button></a>
+            </div>
+        </div>
+
         <h1>🪨 Mood Pebble Jar</h1>
         <p class="subtitle">Drop a tiny positive thought into the digital jar.</p>
         
@@ -20,7 +30,7 @@
         <div class="jar-section">
             <h2>Collected Pebbles</h2>
             <div id="pebblesList" class="pebbles-grid">
-                <!-- Pebbles will load here dynamically -->
+                <!-- Pebbles will load here -->
             </div>
         </div>
     </div>
