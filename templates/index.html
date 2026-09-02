@@ -7,31 +7,34 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <span style="font-size: 13px; color: #7f8c8d;">Logged in as: <strong>{{ username }}</strong></span>
-            <div>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>🪨 Welcome, {{ username }}!</h1>
+            <div class="nav-links">
                 {% if role == 'admin' %}
-                    <a href="/admin"><button style="padding: 6px 12px; font-size: 13px; background-color: #e67e22; margin-right: 5px;">Admin Panel</button></a>
+                    <a href="/admin" class="btn-admin">Admin Panel</a>
                 {% endif %}
-                <a href="/logout"><button style="padding: 6px 12px; font-size: 13px; background-color: #e74c3c;">Logout</button></a>
+                <a href="/logout" class="btn-logout">Log Out</a>
+            </div>
+        </header>
+
+        <!-- Visual Jar Area -->
+        <div class="jar-wrapper">
+            <div class="jar" id="moodJar">
+                <div class="jar-lid"></div>
+                <div class="jar-glass" id="pebblesContainer">
+                    <!-- Falling/dropped pebbles will accumulate here -->
+                </div>
             </div>
         </div>
 
-        <h1>🪨 Mood Pebble Jar</h1>
-        <p class="subtitle">Drop a tiny positive thought into the digital jar.</p>
-        
-        <div class="input-section">
-            <input type="text" id="pebbleInput" placeholder="Type a good vibe (max 100 chars)..." maxlength="100">
-            <button id="dropBtn" onclick="dropPebble()">Drop Pebble</button>
-            <p id="errorMsg" class="error"></p>
-        </div>
-
-        <div class="jar-section">
-            <h2>Collected Pebbles</h2>
-            <div id="pebblesList" class="pebbles-grid">
-                <!-- Pebbles will load here -->
-            </div>
+        <!-- Mood Input Form -->
+        <div class="input-card">
+            <h2>Drop a Mood Pebble</h2>
+            <form id="pebbleForm">
+                <input type="text" id="moodInput" placeholder="How are you feeling today?" required autocomplete="off">
+                <button type="submit">Drop into Jar</button>
+            </form>
         </div>
     </div>
 
