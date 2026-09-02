@@ -1,60 +1,64 @@
-document.addEventListener("DOMContentLoaded", fetchPebbles);
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("pebbleForm");
+    const moodInput = document.getElementById("moodInput");
+    const container = document.getElementById("pebblesContainer");
 
-async function fetchPebbles() {
-    try {
-        const response = await fetch('/api/pebbles');
-        const pebbles = await response.json();
-        
-        const listContainer = document.getElementById('pebblesList');
-        listContainer.innerHTML = '';
+    // Fetch and display existing pebbles on load
+    loadPebbles();
 
-        if (pebbles.length === 0) {
-            listContainer.innerHTML = '<p class="subtitle">The jar is empty. Drop the first pebble!</p>';
-            return;
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const message = moodInput.value.trim();
+        if (!message) return;
+
+        // 1. Create temporary falling animation pebble
+        const fallingPebble = document.createElement("div");
+        fallingPebble.className = "falling-pebble";
+        fallingPebble.textContent = message;
+        container.appendChild(fallingPebble);
+
+        // 2. Send data to Flask backend API
+        try {
+            const response = await fetch("/api/pebbles", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: message })
+            });
+
+            if (response.ok) {
+                moodInput.value = "";
+                // After animation completes, remove temp element and refresh jar contents
+                setTimeout(() => {
+                    fallingPebble.remove();
+                    loadPebbles();
+                }, 800);
+            }
+        } catch (error) {
+            console.error("Error saving pebble:", error);
+            fallingPebble.remove();
         }
+    });
 
-        pebbles.forEach(pebble => {
-            const card = document.createElement('div');
-            card.className = 'pebble-card';
-            card.textContent = pebble.message;
-            listContainer.appendChild(card);
-        });
-    } catch (error) {
-        console.error('Error fetching pebbles:', error);
-    }
-}
+    async function loadPebbles() {
+        try {
+            const response = await fetch("/api/pebbles");
+            if (response.ok) {
+                const pebbles = await response.json();
+                // Clear existing displayed pebbles except any active animations
+                const activeAnimations = container.querySelectorAll(".falling-pebble");
+                container.innerHTML = "";
+                activeAnimations.forEach(p => container.appendChild(p));
 
-async function dropPebble() {
-    const inputField = document.getElementById('pebbleInput');
-    const errorMsg = document.getElementById('errorMsg');
-    const message = inputField.value.trim();
-
-    errorMsg.textContent = '';
-
-    if (!message) {
-        errorMsg.textContent = 'Please type something before dropping!';
-        return;
-    }
-
-    try {
-        const response = await fetch('/api/pebbles', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: message })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            inputField.value = '';
-            fetchPebbles();
-        } else {
-            errorMsg.textContent = data.error || 'Something went wrong.';
+                // Render stored pebbles
+                pebbles.forEach(p => {
+                    const pebbleEl = document.createElement("div");
+                    pebbleEl.className = "stored-pebble";
+                    pebbleEl.textContent = p.message;
+                    container.appendChild(pebbleEl);
+                });
+            }
+        } catch (error) {
+            console.error("Error loading pebbles:", error);
         }
-    } catch (error) {
-        errorMsg.textContent = 'Network error. Could not connect to server.';
-        console.error('Error adding pebble:', error);
     }
-}
+});
