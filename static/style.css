@@ -1,258 +1,45 @@
-/* Dashboard Layout */
-/* General Reset */
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Login & Register Page Styling */
-.login-body {
-    min-height: 100vh;
+/* Intro Jar & Falling Pebble Animation */
+.intro-jar-area {
+    position: relative;
+    height: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 50%, #f0fdf4 100%);
+    align-items: flex-end;
+    margin-bottom: 5px;
 }
 
-.login-container {
-    background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    max-width: 400px;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.jar-icon {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.login-container h1 {
-    margin: 0 0 8px 0;
-    color: #2c3e50;
-    font-size: 24px;
-}
-
-.subtitle {
-    color: #7f8c8d;
-    font-size: 14px;
-    margin-bottom: 25px;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    text-align: left;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.input-group label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #34495e;
-}
-
-.login-form input {
-    padding: 12px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.login-form input:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-}
-
-.submit-btn {
-    margin-top: 10px;
-    padding: 12px;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.submit-btn:hover {
-    background-color: #1d4ed8;
-}
-
-.error-msg {
-    background-color: #fee2e2;
-    color: #991b1b;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-.redirect-text {
-    margin-top: 25px;
-    font-size: 13px;
-    color: #64748b;
-}
-
-.redirect-text a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.redirect-text a:hover {
-    text-decoration: underline;
-}
-
-/* Dashboard Page Styling */
-.dashboard-body {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-}
-
-.dashboard-container {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.dashboard-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.jar-wrapper {
-    margin: 20px 0;
-}
-
-.jar {
-    width: 180px;
-    height: 240px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.jar-lid {
-    width: 100px;
-    height: 15px;
-    background: #94a3b8;
-    border-radius: 4px 4px 0 0;
-}
-
-.jar-glass {
-    width: 160px;
-    height: 220px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 4px solid #cbd5e1;
-    border-top: none;
-    border-radius: 0 0 40px 40px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap-reverse;
-    align-content: flex-start;
-    padding: 10px;
-    gap: 6px;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
-}
-
-.falling-pebble {
+.intro-pebble {
     position: absolute;
     top: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #3b82f6;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    animation: fallIntoJar 0.8s ease-in forwards;
-    z-index: 10;
-    white-space: nowrap;
+    font-size: 26px;
+    animation: dropIntroPebble 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes fallIntoJar {
+.intro-jar-outline {
+    width: 45px;
+    height: 25px;
+    border: 2px dashed #cbd5e1;
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    opacity: 0.7;
+}
+
+@keyframes dropIntroPebble {
     0% {
         top: -40px;
-        transform: translateX(-50%) scale(0.8);
+        transform: scale(0.5) rotate(-10deg);
         opacity: 0;
     }
-    50% {
+    40% {
         opacity: 1;
     }
-    100% {
-        top: 150px;
-        transform: translateX(-50%) scale(1);
+    75% {
+        top: 8px;
+        transform: scale(1.15) rotate(10deg);
     }
-}
-
-.stored-pebble {
-    background: #3b82f6;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 11px;
-    margin: 2px;
-    display: inline-block;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.input-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-#pebbleForm {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-#moodInput {
-    flex: 1;
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    outline: none;
-}
-
-#pebbleForm button {
-    padding: 10px 20px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
+    100% {
+        top: 2px;
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
 }
